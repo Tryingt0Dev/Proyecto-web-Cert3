@@ -1,17 +1,17 @@
-:D
-programas necesarios:
-xampp
-vscode
-node.js
-npm
-composer
+:D\n
+programas necesarios:\n
+xampp\n
+vscode\n
+node.js\n
+npm\n
+composer\n
+\n
+\n
+comandos de utilidad no olvidar:\n
+npm install\n
+npm run dev\n
 
-
-comandos de utilidad no olvidar:
-npm install
-npm run dev
-
-composer install
-
-php artisan key:generate
-php artisan serve
+composer install\n
+\n
+php artisan key:generate\n
+php artisan serve\
