@@ -20,7 +20,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/home') }}">
                     {{ config('app.name', 'Libreria Paco') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -29,9 +29,30 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
+                    @if (Request::is('home'))
+                        <ul class="navbar-nav me-auto">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">home</a>
+                            </li>
+                            @if (Auth::user()->role === 'admin')
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/rol') }}">Asignar roles</a>
+                                </li>
+                            @endif
+                        </ul>
+                    @endif
+                    @if (Request::is('rol'))
+                        <ul class="navbar-nav me-auto">
+                            
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url('/home') }}">home</a>
+                            </li>
+                            
+                        </ul>
+                    @endif
+                        
+                    
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
