@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Libro;
 
 class HomeController extends Controller
 {
@@ -15,6 +16,8 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+    $libros = Libro::all();
+    return view('home', compact('libros'));
     }
+
 }

@@ -4,23 +4,25 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- CSRF Token -->
+    
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Librerias paco') }}</title>
+    <title>{{ config('app.name', 'LibreriasWeb') }}</title>
 
-    <!-- Fonts -->
+   
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
-    <!-- Scripts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+   
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link rel="icon" type="image/x-icon" href="{{ asset('storage\imagenes\demography.png') }}" />
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
+                    <img src="{{ asset('storage/imagenes/logo.png') }}" alt="Logo" style="height: 40px ;">
                     {{ config('app.name', 'Libreria Paco') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -29,29 +31,32 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    @if (Request::is('home'))
-                        <ul class="navbar-nav me-auto">
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/home') }}">home</a>
-                            </li>
+                    <ul class="navbar-nav me-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/home') }}">Home</a>
+                        </li>    
+                        @if (Request::is('home'))
                             @if (Auth::user()->role === 'admin')
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ url('/rol') }}">Asignar roles</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/libros') }}">Agregar Libros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ url('/admin/index') }}">Gestionar cuentas</a>
+                                </li>
                             @endif
-                        </ul>
-                    @endif
-                    @if (Request::is('rol'))
-                        <ul class="navbar-nav me-auto">
-                            
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/home') }}">home</a>
-                            </li>
-                            
-                        </ul>
-                    @endif
+                        @endif
+                        @if (!Request::is('home'))
+                            @if (Auth::check() && Auth::user()->role === 'admin')
+                                <a class="nav-link" href="{{ url('/libros') }}">Agregar Libros</a>
+                            @endif
+                        @endif    
                         
+                    </ul>
+                    
+                    
                     
 
                     <!-- Right Side Of Navbar -->
@@ -70,12 +75,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('ordenes.index') }}">Mis Órdenes</a>
+                                    <a class="dropdown-item" href="{{ route('carrito.show') }}">Carrito</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Cerrar sesion') }}
                                     </a>
-
+                                    
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
                                     </form>
