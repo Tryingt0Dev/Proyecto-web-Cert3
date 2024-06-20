@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2024 a las 20:50:53
+-- Tiempo de generación: 20-06-2024 a las 18:30:08
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -34,14 +34,6 @@ CREATE TABLE `cache` (
   `value` mediumtext NOT NULL,
   `expiration` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Volcado de datos para la tabla `cache`
---
-
-INSERT INTO `cache` (`key`, `value`, `expiration`) VALUES
-('adawdwa@gmail.com|127.0.0.1', 'i:1;', 1718344922),
-('adawdwa@gmail.com|127.0.0.1:timer', 'i:1718344922;', 1718344922);
 
 -- --------------------------------------------------------
 
@@ -109,6 +101,53 @@ CREATE TABLE `job_batches` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `libro`
+--
+
+CREATE TABLE `libro` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `autor` varchar(255) NOT NULL,
+  `descripcion` text DEFAULT NULL,
+  `stock` int(11) NOT NULL DEFAULT 0,
+  `precio` decimal(8,2) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `libro`
+--
+
+INSERT INTO `libro` (`id`, `titulo`, `autor`, `descripcion`, `stock`, `precio`, `created_at`, `updated_at`) VALUES
+(1, 'awdada', 'dwadawdwa', 'dwadawaw', 12567, 12345.00, '2024-06-20 19:28:19', '2024-06-20 19:43:32');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `libro_orden`
+--
+
+CREATE TABLE `libro_orden` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `libro_id` bigint(20) UNSIGNED NOT NULL,
+  `orden_id` bigint(20) UNSIGNED NOT NULL,
+  `cantidad` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `libro_orden`
+--
+
+INSERT INTO `libro_orden` (`id`, `libro_id`, `orden_id`, `cantidad`, `created_at`, `updated_at`) VALUES
+(1, 1, 3, 1, '2024-06-20 19:42:54', '2024-06-20 19:42:54'),
+(2, 1, 4, 12, '2024-06-20 19:57:45', '2024-06-20 19:57:45');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `migrations`
 --
 
@@ -124,9 +163,39 @@ CREATE TABLE `migrations` (
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (1, '0001_01_01_000000_create_users_table', 1),
-(2, '0001_01_01_000001_create_cache_table', 1),
-(3, '0001_01_01_000002_create_jobs_table', 1),
-(4, '2024_06_16_172347_add_role_to_users_table', 2);
+(5, '2024_06_20_093352_create_libros_table', 3),
+(36, '0001_01_01_000001_create_cache_table', 4),
+(37, '0001_01_01_000002_create_jobs_table', 4),
+(44, '2024_06_16_172347_add_role_to_users_table', 5),
+(45, '2024_06_20_095959_create_libro_table', 5),
+(46, '2024_06_20_124357_create_ordenes_table', 5),
+(47, '2024_06_20_124451_create_libro_orden_table', 5),
+(48, '2024_06_20_152023_add_precio_to_libro_table', 6),
+(49, '2024_06_20_153859_add__total_ordenes_table', 7);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ordenes`
+--
+
+CREATE TABLE `ordenes` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `total` decimal(8,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `ordenes`
+--
+
+INSERT INTO `ordenes` (`id`, `user_id`, `created_at`, `updated_at`, `total`) VALUES
+(1, 3, '2024-06-20 19:40:46', '2024-06-20 19:40:46', 0.00),
+(2, 3, '2024-06-20 19:42:20', '2024-06-20 19:42:20', 0.00),
+(3, 3, '2024-06-20 19:42:54', '2024-06-20 19:42:54', 12345.00),
+(4, 3, '2024-06-20 19:57:45', '2024-06-20 19:57:45', 148140.00);
 
 -- --------------------------------------------------------
 
@@ -160,7 +229,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('YvVc5NTY3n0Qg04ZCmXSvVRigSINEmLLvJnte5Zm', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQzIzY09rRUJmb09vN0FUejVPT3lZWHM2SnJ6Y25rajZjMXZzcDNXWiI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MztzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MTg1NjI5Nzc7fX0=', 1718563663);
+('tGzAGSsQZDK8oBdONAtyD9Km0UpIEYESdhdRj3PE', 3, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidUhMQ0FnOFhqZ0Y0ZjlGNkc2S2R6SVIxWmRUZnZsenkwTzY4R2ZnZCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9ob21lIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MztzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MTg4OTgxOTQ7fX0=', 1718900722);
 
 -- --------------------------------------------------------
 
@@ -185,8 +254,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(3, 'test1', 'test1@gmail.com', NULL, '$2y$12$hsEjCrLh9qykXMcfCqVQWOzfR3o8MABrCVJZ8xxLRboB0jEDdivQi', 't3NapPb4Hz54Nrce6cO8n6P95l50ISx0ox0e3xIRRDMIJihbf4sjhRqXou5T', '2024-06-14 10:08:01', '2024-06-14 10:08:01', 'admin'),
-(4, 'tere', 'tere@aaa.com', NULL, '$2y$12$TSRLCkGuKEq1I9KdSVL06uqjILkpMr6/qDW4DaQiO6j3sb/NEU/Wi', 'VrqQBUUGVYqUrvOYIlQWoEh7KuFVnVwl7V72WA53zcP49i0VrVcsFDbWzvoG', '2024-06-14 18:19:01', '2024-06-16 22:26:43', 'user');
+(3, 'test1', 'test1@gmail.com', NULL, '$2y$12$hsEjCrLh9qykXMcfCqVQWOzfR3o8MABrCVJZ8xxLRboB0jEDdivQi', 'HwxpYZFmIZ49c96ZUzYV5HAIyk8NKI4EyNLT1wtSbZ6OSlL3qJV8vY42FKsT', '2024-06-14 10:08:01', '2024-06-14 10:08:01', 'admin');
 
 --
 -- Índices para tablas volcadas
@@ -225,10 +293,31 @@ ALTER TABLE `job_batches`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `libro`
+--
+ALTER TABLE `libro`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `libro_orden`
+--
+ALTER TABLE `libro_orden`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `libro_orden_orden_id_foreign` (`orden_id`),
+  ADD KEY `libro_orden_libro_id_foreign` (`libro_id`);
+
+--
 -- Indices de la tabla `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `ordenes`
+--
+ALTER TABLE `ordenes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ordenes_user_id_foreign` (`user_id`);
 
 --
 -- Indices de la tabla `password_reset_tokens`
@@ -268,16 +357,51 @@ ALTER TABLE `jobs`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `libro`
+--
+ALTER TABLE `libro`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `libro_orden`
+--
+ALTER TABLE `libro_orden`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+
+--
+-- AUTO_INCREMENT de la tabla `ordenes`
+--
+ALTER TABLE `ordenes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `libro_orden`
+--
+ALTER TABLE `libro_orden`
+  ADD CONSTRAINT `libro_orden_libro_id_foreign` FOREIGN KEY (`libro_id`) REFERENCES `libro` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `libro_orden_orden_id_foreign` FOREIGN KEY (`orden_id`) REFERENCES `ordenes` (`id`);
+
+--
+-- Filtros para la tabla `ordenes`
+--
+ALTER TABLE `ordenes`
+  ADD CONSTRAINT `ordenes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 --
 -- Base de datos: `phpmyadmin`
 --
@@ -344,6 +468,13 @@ CREATE TABLE `pma__designer_settings` (
   `username` varchar(64) NOT NULL,
   `settings_data` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Settings related to Designer';
+
+--
+-- Volcado de datos para la tabla `pma__designer_settings`
+--
+
+INSERT INTO `pma__designer_settings` (`username`, `settings_data`) VALUES
+('root', '{\"angular_direct\":\"direct\",\"relation_lines\":\"true\",\"snap_to_grid\":\"off\"}');
 
 -- --------------------------------------------------------
 
@@ -434,7 +565,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"libreria\",\"table\":\"users\"},{\"db\":\"libreria\",\"table\":\"sessions\"},{\"db\":\"libreria\",\"table\":\"cache\"},{\"db\":\"libreria\",\"table\":\"password_reset_tokens\"},{\"db\":\"libreria\",\"table\":\"migrations\"},{\"db\":\"libreria\",\"table\":\"job_batches\"},{\"db\":\"libreria\",\"table\":\"jobs\"}]');
+('root', '[{\"db\":\"libreria\",\"table\":\"users\"},{\"db\":\"libreria\",\"table\":\"ordenes\"},{\"db\":\"libreria\",\"table\":\"libro_orden\"},{\"db\":\"libreria\",\"table\":\"libro\"},{\"db\":\"libreria\",\"table\":\"cache\"},{\"db\":\"libreria\",\"table\":\"job_batches\"},{\"db\":\"libreria\",\"table\":\"sessions\"},{\"db\":\"libreria\",\"table\":\"libros\"},{\"db\":\"libreria\",\"table\":\"books\"},{\"db\":\"libreria\",\"table\":\"password_reset_tokens\"}]');
 
 -- --------------------------------------------------------
 
@@ -505,6 +636,13 @@ CREATE TABLE `pma__table_uiprefs` (
   `last_update` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='Tables'' UI preferences';
 
+--
+-- Volcado de datos para la tabla `pma__table_uiprefs`
+--
+
+INSERT INTO `pma__table_uiprefs` (`username`, `db_name`, `table_name`, `prefs`, `last_update`) VALUES
+('root', 'libreria', 'users', '{\"sorted_col\":\"`users`.`role` ASC\"}', '2024-06-20 14:19:18');
+
 -- --------------------------------------------------------
 
 --
@@ -541,7 +679,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2024-06-16 18:26:49', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
+('root', '2024-06-20 13:31:29', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
 
 -- --------------------------------------------------------
 
@@ -710,7 +848,7 @@ ALTER TABLE `pma__column_info`
 -- AUTO_INCREMENT de la tabla `pma__export_templates`
 --
 ALTER TABLE `pma__export_templates`
-  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(5) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `pma__history`
