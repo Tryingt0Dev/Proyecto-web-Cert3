@@ -31,7 +31,8 @@ class CarritoController extends Controller
             $carrito[$id] = [
                 "titulo" => $libro->titulo,
                 "cantidad" => 1,
-                "precio" => $libro->precio, 
+                "precio" => $libro->precio,
+                "total" =>$total->total
             ];
         }
 
