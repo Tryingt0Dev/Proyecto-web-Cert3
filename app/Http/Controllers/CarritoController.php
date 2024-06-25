@@ -8,15 +8,22 @@ use App\Models\Libro;
 class CarritoController extends Controller
 {
     public function show(){
-        $carrito = session()->get('carrito');
+        $carrito = session()->get('carrito', []);
         $total = 0;
-
+    
+        
+        if (empty($carrito)) {
+            return redirect()->route('home')->with('error', 'El carrito de compras está vacío.');
+        }
+    
+        
         foreach($carrito as $id => $details) {
             $total += $details['cantidad'] * $details['precio'];
         }
-
+    
         return view('carrito.show', compact('carrito', 'total'));
     }
+    
 
 
     
@@ -32,7 +39,7 @@ class CarritoController extends Controller
                 "titulo" => $libro->titulo,
                 "cantidad" => 1,
                 "precio" => $libro->precio,
-                "total" =>$total->total
+                
             ];
         }
 

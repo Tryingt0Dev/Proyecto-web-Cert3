@@ -5,7 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LibroController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\OrdenesController;
-
+use App\Http\Controllers\HomeController;
 
 
 Route::get('/', function () {
@@ -14,11 +14,11 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::get('/rol', [UserController::class, 'MostrarFormularioRol'])->name('DarRol');
 Route::post('/rol', [UserController::class, 'DarRol'])->name('rol');

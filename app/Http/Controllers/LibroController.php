@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Libro;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LibroController extends Controller
 {
@@ -48,8 +49,7 @@ class LibroController extends Controller
         return view('libros.edit', compact('libro'));
     }
 
-    public function update(Request $request, $id)
-{
+    public function update(Request $request, $id){
     $validated = $request->validate([
         'titulo' => 'required',
         'autor' => 'required',
@@ -68,17 +68,14 @@ class LibroController extends Controller
         
         $imagenPath = $request->file('imagen')->store('public/imagenes');
         $validated['imagen'] = $imagenPath;
+    
+        }
+        $libro->update($validated);
+
+        return redirect()->route('libros.index')->with('success', 'Libro actualizado correctamente');
     }
 
-    $libro->update($validated);
-
-    return redirect()->route('libros.index')->with('success', 'Libro actualizado correctamente');
-}
-
-
-
-    public function destroy($id)
-    {
+    public function destroy($id){
         $libro = Libro::findOrFail($id);
         $libro->stock = 0;
         $libro->save();

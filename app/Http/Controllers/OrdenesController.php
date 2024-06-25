@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Orden;
+use App\Models\Libro;
 use App\Models\LibroOrden;
 use Illuminate\Support\Facades\Auth;
 
@@ -32,6 +33,12 @@ class OrdenesController extends Controller
             return redirect()->back()->with('error', 'Tu carrito está vacío.');
         }
 
+        foreach ($carrito as $id => $details) {
+            $libro = Libro::findOrFail($id);
+            $libro->stock -= $details['cantidad'];
+            $libro->save();
+        }
+
         $orden = new Orden();
         $orden->user_id = Auth::id();
         $orden->total = array_reduce($carrito, function ($total, $item) {
@@ -50,5 +57,6 @@ class OrdenesController extends Controller
         session()->forget('carrito');
 
         return redirect()->route('ordenes.show', $orden->id)->with('success', 'Compra procesada exitosamente.');
+
     }
 }

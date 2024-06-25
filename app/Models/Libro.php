@@ -15,6 +15,6 @@ class Libro extends Model
 
 
     public function ordenes(){
-    return $this->belongsToMany(Orden::class)->withPivot('cantidad');
+        return $this->belongsToMany(Orden::class, 'libro_orden', 'libro_id', 'orden_id')->withPivot('cantidad');
     }
 }

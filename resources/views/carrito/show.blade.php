@@ -1,13 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
-        <h2>Carrito de Compras</h2>
-        @if(session('success'))
-            <div class="alert alert-success">
-                {{ session('success') }}
-            </div>
-        @endif
+<div class="container">
+    @if(session('error'))
+        <div class="alert alert-danger">
+            {{ session('error') }}
+        </div>
+    @endif
+
+    <h2>Carrito de Compras</h2>
+
+    @if (!empty($carrito))
         <table class="table">
             <thead>
                 <tr>
@@ -36,16 +39,17 @@
                         </td>
                     </tr>
                 @endforeach
-                <tr>
-                    <td colspan="2"></td>
-                    <td><strong>Total: ${{ $total }}</strong></td>
-                    <td></td>
-                </tr>
             </tbody>
         </table>
+        <p>Total: {{ $total }}</p>
         <form action="{{ route('checkout') }}" method="post">
             @csrf
             <button type="submit" class="btn btn-success">Procesar Compra</button>
         </form>
-    </div>
+    @else
+        <div class="alert alert-warning">
+            Tu carrito de compras está vacío.
+        </div>
+    @endif
+</div>
 @endsection

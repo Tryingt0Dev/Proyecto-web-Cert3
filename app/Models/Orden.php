@@ -19,4 +19,7 @@ class Orden extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function libros(){
+        return $this->belongsToMany(Libro::class)->withPivot('cantidad');
+    }
 }

@@ -33,24 +33,28 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/home') }}">Home</a>
-                        </li>    
+                            <a class="nav-link" href="{{ route('home') }}">Home</a>
+                        </li>
                         @if (Request::is('home'))
                             @if (Auth::user()->role === 'admin')
+                                
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/rol') }}">Asignar roles</a>
+                                    <a class="nav-link" href="{{ route('rol') }}">Asignar roles</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/libros') }}">Agregar Libros</a>
+                                    <a class="nav-link" href="{{ route('libros.index') }}">Lista libros</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ url('/admin/index') }}">Gestionar cuentas</a>
+                                    <a class="nav-link" href="{{ route('libros.agregar') }}">Agregar Libros</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('admin.index') }}">Gestionar cuentas</a>
                                 </li>
                             @endif
                         @endif
                         @if (!Request::is('home'))
                             @if (Auth::check() && Auth::user()->role === 'admin')
-                                <a class="nav-link" href="{{ url('/libros') }}">Agregar Libros</a>
+                                <a class="nav-link" href="{{ route('libros.agregar') }}">Agregar Libros</a>
                             @endif
                         @endif    
                         
