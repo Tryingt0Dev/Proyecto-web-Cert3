@@ -24,6 +24,6 @@
     
 </div>
 <div class="form-group">
-    <img src="{{ asset('storage/imagenes/logo.png') }}" alt="logo soli" style="height: 40px ;">
+    <img src="{{ asset('storage/imagenes/pedidolibro.png') }}" alt="logo soli" style="height: 40px ;">
 </div>
 @endsection

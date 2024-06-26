@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="container form-register">
         <h2>Listado de Usuarios</h2>
         @if(session('success'))
             <div class="alert alert-success">

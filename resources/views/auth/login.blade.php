@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <link href="{{ asset('css/custom.css') }}" rel="stylesheet">
+
 </head>
 <body>
     <div class="login-container">
