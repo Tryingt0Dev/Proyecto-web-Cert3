@@ -13,13 +13,15 @@
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-   
+    <link href="{{ asset('css/custom2.css') }}" rel="stylesheet">  
+    <link href="{{ asset('css/custom3.css') }}" rel="stylesheet"> 
+    <link href="{{ asset('css/custom4.css') }}" rel="stylesheet"> 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <link rel="icon" type="image/x-icon" href="{{ asset('storage\imagenes\demography.png') }}" />
 </head>
-<body>
+<body class="color2">
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm color">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
                     <img src="{{ asset('storage/imagenes/logo.png') }}" alt="Logo" style="height: 40px ;">

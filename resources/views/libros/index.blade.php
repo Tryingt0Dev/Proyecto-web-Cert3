@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">{{ __('Libros') }}</div>
 
-                    <div class="card-body">
+                    <div class="card-body kolor">
                         <a href="{{ route('libros.agregar') }}" class="btn btn-primary mb-3">Agregar Libro</a>
 
                         @if (session('success'))
@@ -16,7 +16,7 @@
                             </div>
                         @endif
 
-                        <table class="table">
+                        <table class="table kolor">
                             <thead>
                                 <tr>
                                     <th>ID</th>

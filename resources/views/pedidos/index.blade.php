@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container kolor">
     <h2>Pedidos de Libros</h2>
     @if(session('success'))
         <div class="alert alert-success">
             {{ session('success') }}
         </div>
     @endif
-    <table class="table">
+    <table class="table ">
         <thead>
             <tr>
                 <th>Título</th>
@@ -20,7 +20,7 @@
                 @endif
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             @foreach($pedidos as $pedido)
                 <tr>
                     <td>{{ $pedido->titulo }}</td>

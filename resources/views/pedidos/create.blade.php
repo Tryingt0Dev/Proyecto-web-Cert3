@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="form-register">
     <h2>Solicitar un libro</h2>
     @if(session('success'))
         <div class="alert alert-success">
@@ -20,5 +20,10 @@
         </div>
         <button type="submit" class="btn btn-primary">Enviar Pedido</button>
     </form>
+
+    
+</div>
+<div class="form-group">
+    <img src="{{ asset('storage/imagenes/logo.png') }}" alt="logo soli" style="height: 40px ;">
 </div>
 @endsection

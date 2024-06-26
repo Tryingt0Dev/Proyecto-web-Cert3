@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="container">
+    <div class="form-register">
         <h1>Asignar rol</h1>
 
         @if(session('success'))
