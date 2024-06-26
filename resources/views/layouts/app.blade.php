@@ -35,6 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('home') }}">Home</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('pedidos.create') }}">Pedir libro nuevo</a>
+                        </li>
                         @if (Request::is('home'))
                             @if (Auth::user()->role === 'admin')
                                 
@@ -42,6 +45,10 @@
                                     <a class="nav-link" href="{{ route('rol') }}">Asignar roles</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('pedidos.index') }}">Lista libros pedidos</a>
+                                </li>
+                                <li class="nav-item">
+                                    
                                     <a class="nav-link" href="{{ route('libros.index') }}">Lista libros</a>
                                 </li>
                                 <li class="nav-item">

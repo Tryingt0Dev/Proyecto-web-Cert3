@@ -6,7 +6,7 @@ use App\Http\Controllers\LibroController;
 use App\Http\Controllers\CarritoController;
 use App\Http\Controllers\OrdenesController;
 use App\Http\Controllers\HomeController;
-
+use App\Http\Controllers\PedidoController;
 
 Route::get('/', function () {
     return view('/auth/login');
@@ -45,3 +45,7 @@ Route::post('/checkout', [OrdenesController::class, 'checkout'])->name('checkout
 Route::get('/ordenes', [OrdenesController::class, 'index'])->name('ordenes.index');
 Route::get('/ordenes/{id}', [OrdenesController::class, 'show'])->name('ordenes.show');
 
+Route::get('/pedidos/create', [PedidoController::class, 'create'])->name('pedidos.create');
+Route::post('/pedidos', [PedidoController::class, 'store'])->name('pedidos.store');
+Route::get('/pedidos', [PedidoController::class, 'index'])->name('pedidos.index');
+Route::delete('/pedidos/{pedido}', [PedidoController::class, 'destroy'])->name('pedidos.destroy');
