@@ -20,23 +20,23 @@ class LibroController extends Controller
     }
 
     public function store(Request $request){
-    $validated = $request->validate([
-        'titulo' => 'required',
-        'autor' => 'required',
-        'stock' => 'required|integer|min:0',
-        'descripcion' => 'required',
-        'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        'precio' => 'required|numeric|min:1', 
-    ]);
+        $validated = $request->validate([
+            'titulo' => 'required',
+            'autor' => 'required',
+            'stock' => 'required|integer|min:0',
+            'descripcion' => 'required',
+            'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'precio' => 'required|numeric|min:1',
+        ]);
 
-    if ($request->hasFile('imagen')) {
-        $imagenPath = $request->file('imagen')->store('public/imagenes');
-        $validated['imagen'] = $imagenPath;
-    }
+        if ($request->hasFile('imagen')) {
+            $imagenPath = $request->file('imagen')->store('public/imagenes');
+            $validated['imagen'] = $imagenPath;
+        }
 
-    Libro::create($validated);
+        Libro::create($validated);
 
-    return redirect()->route('libros.index')->with('success', 'Libro creado correctamente');
+        return redirect()->route('libros.index')->with('success', 'Libro creado correctamente');
     }
 
     public function show(Libro $libro)
@@ -55,7 +55,7 @@ class LibroController extends Controller
         'autor' => 'required',
         'stock' => 'required|integer|min:0',
         'descripcion' => 'required',
-        'imagen' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'imagen' => 'image|max:2048',
         'precio' => 'required|numeric|min:1', 
     ]);
 
