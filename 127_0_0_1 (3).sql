@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-06-2024 a las 18:30:08
+-- Tiempo de generación: 26-06-2024 a las 05:42:55
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -112,15 +112,20 @@ CREATE TABLE `libro` (
   `stock` int(11) NOT NULL DEFAULT 0,
   `precio` decimal(8,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `imagen` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `libro`
 --
 
-INSERT INTO `libro` (`id`, `titulo`, `autor`, `descripcion`, `stock`, `precio`, `created_at`, `updated_at`) VALUES
-(1, 'awdada', 'dwadawdwa', 'dwadawaw', 12567, 12345.00, '2024-06-20 19:28:19', '2024-06-20 19:43:32');
+INSERT INTO `libro` (`id`, `titulo`, `autor`, `descripcion`, `stock`, `precio`, `created_at`, `updated_at`, `imagen`) VALUES
+(1, 'awdada', 'dwadawdwa', 'dwadawaw', 1, 12345.00, '2024-06-20 19:28:19', '2024-06-25 10:40:51', NULL),
+(2, 'ghg', 'hguhgvb', 'awdaw', 0, 23425.00, '2024-06-20 20:37:49', '2024-06-21 23:32:11', NULL),
+(3, '3123213', '2131221', '32432', 0, 2345.00, '2024-06-21 23:44:44', '2024-06-21 23:44:58', 'public/imagenes/62WhHtO1rkOHTmFRUHV1mWlh8UmbBYND5J81x2QK.png'),
+(4, 'asfasfas', 'asfasfas', 'asfasfa', 68, 123.00, '2024-06-25 10:41:33', '2024-06-25 10:49:25', NULL),
+(5, 'adawdwa', 'yo', 'daw', 43, 12.00, '2024-06-26 06:58:49', '2024-06-26 06:58:49', 'public/imagenes/LEmxrrOfMB3Q3U7acXiMjTi9YmhW8OIVRxMXibpf.png');
 
 -- --------------------------------------------------------
 
@@ -143,7 +148,13 @@ CREATE TABLE `libro_orden` (
 
 INSERT INTO `libro_orden` (`id`, `libro_id`, `orden_id`, `cantidad`, `created_at`, `updated_at`) VALUES
 (1, 1, 3, 1, '2024-06-20 19:42:54', '2024-06-20 19:42:54'),
-(2, 1, 4, 12, '2024-06-20 19:57:45', '2024-06-20 19:57:45');
+(2, 1, 4, 12, '2024-06-20 19:57:45', '2024-06-20 19:57:45'),
+(3, 1, 5, 10, '2024-06-21 23:21:49', '2024-06-21 23:21:49'),
+(4, 2, 5, 13, '2024-06-21 23:21:49', '2024-06-21 23:21:49'),
+(5, 1, 6, 1, '2024-06-23 07:46:18', '2024-06-23 07:46:18'),
+(6, 1, 7, 1, '2024-06-25 10:28:32', '2024-06-25 10:28:32'),
+(7, 1, 8, 1, '2024-06-25 10:40:51', '2024-06-25 10:40:51'),
+(8, 4, 9, 8, '2024-06-25 10:49:25', '2024-06-25 10:49:25');
 
 -- --------------------------------------------------------
 
@@ -171,7 +182,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (46, '2024_06_20_124357_create_ordenes_table', 5),
 (47, '2024_06_20_124451_create_libro_orden_table', 5),
 (48, '2024_06_20_152023_add_precio_to_libro_table', 6),
-(49, '2024_06_20_153859_add__total_ordenes_table', 7);
+(49, '2024_06_20_153859_add__total_ordenes_table', 7),
+(50, '2024_06_21_194323_add_imagen_libros_table', 8),
+(51, '2024_06_25_224940_create_pedidos_table', 9);
 
 -- --------------------------------------------------------
 
@@ -195,7 +208,12 @@ INSERT INTO `ordenes` (`id`, `user_id`, `created_at`, `updated_at`, `total`) VAL
 (1, 3, '2024-06-20 19:40:46', '2024-06-20 19:40:46', 0.00),
 (2, 3, '2024-06-20 19:42:20', '2024-06-20 19:42:20', 0.00),
 (3, 3, '2024-06-20 19:42:54', '2024-06-20 19:42:54', 12345.00),
-(4, 3, '2024-06-20 19:57:45', '2024-06-20 19:57:45', 148140.00);
+(4, 3, '2024-06-20 19:57:45', '2024-06-20 19:57:45', 148140.00),
+(5, 3, '2024-06-21 23:21:49', '2024-06-21 23:21:49', 427975.00),
+(6, 3, '2024-06-23 07:46:18', '2024-06-23 07:46:18', 12345.00),
+(7, 3, '2024-06-25 10:28:32', '2024-06-25 10:28:32', 12345.00),
+(8, 3, '2024-06-25 10:40:51', '2024-06-25 10:40:51', 12345.00),
+(9, 3, '2024-06-25 10:49:25', '2024-06-25 10:49:25', 984.00);
 
 -- --------------------------------------------------------
 
@@ -208,6 +226,29 @@ CREATE TABLE `password_reset_tokens` (
   `token` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pedidos`
+--
+
+CREATE TABLE `pedidos` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
+  `titulo` varchar(255) NOT NULL,
+  `autor` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `pedidos`
+--
+
+INSERT INTO `pedidos` (`id`, `user_id`, `titulo`, `autor`, `created_at`, `updated_at`) VALUES
+(1, 3, 'ola', 'yo', '2024-06-26 03:03:38', '2024-06-26 03:03:38'),
+(3, 3, '234523qa', 'dawdwadwa', '2024-06-26 03:13:04', '2024-06-26 03:13:04');
 
 -- --------------------------------------------------------
 
@@ -229,7 +270,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('tGzAGSsQZDK8oBdONAtyD9Km0UpIEYESdhdRj3PE', 3, '127.0.0.1', 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Mobile Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoidUhMQ0FnOFhqZ0Y0ZjlGNkc2S2R6SVIxWmRUZnZsenkwTzY4R2ZnZCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly9sb2NhbGhvc3Q6ODAwMC9ob21lIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MztzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MTg4OTgxOTQ7fX0=', 1718900722);
+('az0EA7hQ5TwwRqwuJoTpDPgDlMUhLCzdDpz4oWOA', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiT2tkbWNjZlFNeVJHZENlblh4UWRIVEgwMVUwRVUzNnRtcXBBNWJCTyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MztzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MTkzNTMwMzk7fX0=', 1719360586),
+('Jf15SHHFnKntHhSCMr7PguL48vcLIySkcawEePDe', 3, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiRlp3dktwWllLdHhqelRIZFNHaURWVkhGNlZ4aVRaT0ZnQ1ZnQjFnYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MjY6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9ob21lIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MztzOjQ6ImF1dGgiO2E6MTp7czoyMToicGFzc3dvcmRfY29uZmlybWVkX2F0IjtpOjE3MTkzNzA2NjQ7fX0=', 1719373251);
 
 -- --------------------------------------------------------
 
@@ -254,7 +296,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`, `role`) VALUES
-(3, 'test1', 'test1@gmail.com', NULL, '$2y$12$hsEjCrLh9qykXMcfCqVQWOzfR3o8MABrCVJZ8xxLRboB0jEDdivQi', 'HwxpYZFmIZ49c96ZUzYV5HAIyk8NKI4EyNLT1wtSbZ6OSlL3qJV8vY42FKsT', '2024-06-14 10:08:01', '2024-06-14 10:08:01', 'admin');
+(3, 'test1', 'test1@gmail.com', NULL, '$2y$12$hsEjCrLh9qykXMcfCqVQWOzfR3o8MABrCVJZ8xxLRboB0jEDdivQi', '1s1olw8WX2hgvhAVoYdqmLNFsHBCwu4OJqf5zw5Py1TuOBEokCouN9YnegCt', '2024-06-14 10:08:01', '2024-06-14 10:08:01', 'admin');
 
 --
 -- Índices para tablas volcadas
@@ -326,6 +368,13 @@ ALTER TABLE `password_reset_tokens`
   ADD PRIMARY KEY (`email`);
 
 --
+-- Indices de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `pedidos_user_id_foreign` (`user_id`);
+
+--
 -- Indices de la tabla `sessions`
 --
 ALTER TABLE `sessions`
@@ -360,25 +409,31 @@ ALTER TABLE `jobs`
 -- AUTO_INCREMENT de la tabla `libro`
 --
 ALTER TABLE `libro`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `libro_orden`
 --
 ALTER TABLE `libro_orden`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT de la tabla `ordenes`
 --
 ALTER TABLE `ordenes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -402,6 +457,12 @@ ALTER TABLE `libro_orden`
 --
 ALTER TABLE `ordenes`
   ADD CONSTRAINT `ordenes_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Filtros para la tabla `pedidos`
+--
+ALTER TABLE `pedidos`
+  ADD CONSTRAINT `pedidos_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 --
 -- Base de datos: `phpmyadmin`
 --
@@ -565,7 +626,7 @@ CREATE TABLE `pma__recent` (
 --
 
 INSERT INTO `pma__recent` (`username`, `tables`) VALUES
-('root', '[{\"db\":\"libreria\",\"table\":\"users\"},{\"db\":\"libreria\",\"table\":\"ordenes\"},{\"db\":\"libreria\",\"table\":\"libro_orden\"},{\"db\":\"libreria\",\"table\":\"libro\"},{\"db\":\"libreria\",\"table\":\"cache\"},{\"db\":\"libreria\",\"table\":\"job_batches\"},{\"db\":\"libreria\",\"table\":\"sessions\"},{\"db\":\"libreria\",\"table\":\"libros\"},{\"db\":\"libreria\",\"table\":\"books\"},{\"db\":\"libreria\",\"table\":\"password_reset_tokens\"}]');
+('root', '[{\"db\":\"libreria\",\"table\":\"libro\"},{\"db\":\"libreria\",\"table\":\"libro_orden\"},{\"db\":\"libreria\",\"table\":\"ordenes\"},{\"db\":\"libreria\",\"table\":\"users\"},{\"db\":\"libreria\",\"table\":\"cache\"},{\"db\":\"libreria\",\"table\":\"job_batches\"},{\"db\":\"libreria\",\"table\":\"sessions\"},{\"db\":\"libreria\",\"table\":\"libros\"},{\"db\":\"libreria\",\"table\":\"books\"},{\"db\":\"libreria\",\"table\":\"password_reset_tokens\"}]');
 
 -- --------------------------------------------------------
 
@@ -679,7 +740,7 @@ CREATE TABLE `pma__userconfig` (
 --
 
 INSERT INTO `pma__userconfig` (`username`, `timevalue`, `config_data`) VALUES
-('root', '2024-06-20 13:31:29', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
+('root', '2024-06-26 03:42:27', '{\"Console\\/Mode\":\"collapse\",\"lang\":\"es\"}');
 
 -- --------------------------------------------------------
 
